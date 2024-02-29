@@ -9,6 +9,7 @@ import wishListReducer, {
   addWishListItem,
   removeWishListItem,
 } from './slices/wishListSlice'
+import { produce } from 'immer'
 
 const reducer = combineReducers({
   products: productsReducer,
