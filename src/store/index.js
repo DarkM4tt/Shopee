@@ -1,23 +1,10 @@
-import { combineReducers, createStore } from 'redux'
 import productsReducer from './slices/productsSlice'
-import cartReducer, {
-  addCartItem,
-  decreaseCartItemQuantity,
-  increaseCartItemQuantity,
-} from './slices/cartSlice'
-import wishListReducer, {
-  addWishListItem,
-  removeWishListItem,
-} from './slices/wishListSlice'
-import { produce } from 'immer'
+import cartReducer from './slices/cartSlice'
+import wishListReducer from './slices/wishListSlice'
+import { configureStore } from '@reduxjs/toolkit'
 
-const reducer = combineReducers({
+export const store = configureStore({ reducer: {
   products: productsReducer,
   cartItems: cartReducer,
   wishList: wishListReducer,
-})
-
-export const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__?.()
-)
+} })
