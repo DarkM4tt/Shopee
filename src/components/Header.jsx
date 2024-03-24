@@ -2,38 +2,15 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import CartIcon from "../assets/cart-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchProducts,
-  fetchProductsError,
-  updateAllProducts,
-} from "../store/slices/productsSlice";
-import {
-  fetchCartItems,
-  fetchCartItemsError,
-  loadCartItems,
-} from "../store/slices/cartSlice";
-import { fetchData } from "../store/middleware/api";
+import { fetchProductsData } from "../store/slices/productsSlice";
+import { fetchCartItemsData } from "../store/slices/cartSlice";
 
 export default function Header() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      fetchData({
-        url: "products",
-        onStart: fetchProducts.type,
-        onSuccess: updateAllProducts.type,
-        onError: fetchProductsError.type,
-      })
-    );
-    dispatch(
-      fetchData({
-        url: "cart/5",
-        onStart: fetchCartItems.type,
-        onSuccess: loadCartItems.type,
-        onError: fetchCartItemsError.type,
-      })
-    );
+    dispatch(fetchProductsData());
+    dispatch(fetchCartItemsData());
   }, []);
 
   const cartItems = useSelector((state) => state.cartItems.list);

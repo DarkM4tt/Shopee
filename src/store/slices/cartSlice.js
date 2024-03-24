@@ -66,14 +66,26 @@ export const getAllCartItems = createSelector(getCartItems, (state) => state);
 export const getCartLoadingState = (state) => state.products.loading;
 export const getCartErrorState = (state) => state.products.error;
 
+const { fetchCartItemsError, fetchCartItems, loadCartItems } = slice.actions;
+
+// Thunk Action Creator
+export const fetchCartItemsData = () => (dispatch) => {
+  dispatch(fetchCartItems());
+  fetch("https://fakestoreapi.com/cart/5")
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch(loadCartItems(data));
+    })
+    .catch(() => {
+      dispatch(fetchCartItemsError());
+    });
+};
+
 export const {
-  fetchCartItems,
-  fetchCartItemsError,
   addCartItem,
   removeCartItem,
   increaseCartItemQuantity,
   decreaseCartItemQuantity,
-  loadCartItems,
 } = slice.actions;
 
 export default slice.reducer;
