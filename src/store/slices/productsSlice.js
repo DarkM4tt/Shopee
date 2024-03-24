@@ -1,28 +1,33 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const slice = createSlice({
-  name: 'product',
+  name: "product",
   initialState: {
     loading: false,
     list: [],
-    error: ''
+    error: "",
   },
   reducers: {
     fetchProducts(state) {
-      state.loading = true
+      state.loading = true;
     },
     fetchProductsError(state, action) {
-      state.loading = false
-      state.error = action.payload || 'Something went wrong!'
+      state.loading = false;
+      state.error = action.payload || "Something went wrong!";
     },
     updateAllProducts(state, action) {
-      state.loading = false
-      state.list = action.payload
-      state.error = ''
+      state.loading = false;
+      state.list = action.payload;
+      state.error = "";
     },
-  }
-})
+  },
+});
 
-export const { updateAllProducts, fetchProducts, fetchProductsError } = slice.actions
+export const getAllProducts = (state) => state.products.list;
+export const getProductLoadingState = (state) => state.products.loading;
+export const getProductErrorState = (state) => state.products.error;
 
-export default slice.reducer
+export const { updateAllProducts, fetchProducts, fetchProductsError } =
+  slice.actions;
+
+export default slice.reducer;
