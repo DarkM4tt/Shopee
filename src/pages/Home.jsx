@@ -11,8 +11,6 @@ export default function Home() {
   const isLoading = useSelector(getProductLoadingState);
   const isError = useSelector(getProductErrorState);
 
-  console.log("ProductList", productsList);
-
   return isLoading ? (
     <h1>Loading...</h1>
   ) : isError ? (
